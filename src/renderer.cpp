@@ -40,12 +40,15 @@ Renderer::~Renderer() {
 
 void Renderer::Render(Snake const snake, SDL_Point const &food) {
   SDL_Rect block;
+  SDL_Rect field;
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
 
   // Clear screen
   SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
   SDL_RenderClear(sdl_renderer);
+
+  SDL_SetRenderDrawBlendMode(sdl_renderer, SDL_BLENDMODE_BLEND);
 
   // Render food
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xCC, 0x00, 0xFF);
@@ -70,6 +73,14 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
   }
   SDL_RenderFillRect(sdl_renderer, &block);
+
+  field.x = block.x - block.w;
+  field.y = block.y - block.h;
+  field.w = 3*block.w;
+  field.h = 3*block.h;
+  
+  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00 , 0x00, 0x7F);
+  SDL_RenderFillRect(sdl_renderer, &field);
 
   // Update Screen
   SDL_RenderPresent(sdl_renderer);

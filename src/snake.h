@@ -12,7 +12,8 @@ class Snake {
       : grid_width(grid_width),
         grid_height(grid_height),
         head_x(grid_width / 2),
-        head_y(grid_height / 2) {}
+        head_y(grid_height / 2),
+        active_field_(false) {}
 
   void Update();
 
@@ -35,6 +36,8 @@ class Snake {
   bool growing{false};
   int grid_width;
   int grid_height;
+
+  bool active_field_;
 };
 
 #endif
